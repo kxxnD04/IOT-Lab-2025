@@ -36,4 +36,4 @@ COPY --from=builder /usr/src/app/dist ./dist
 EXPOSE 3000
 
 # คำสั่งที่จะรันเมื่อ container เริ่มทำงาน
-CMD [ "node", "dist/index.js" ]
+CMD ["node", "-r", "dotenv/config", "dist/api/index.js"]

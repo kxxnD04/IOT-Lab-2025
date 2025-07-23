@@ -3,64 +3,33 @@ version: '3.8'
 
 # กำหนด Services หรือ Containers ที่จะรัน
 services:
-  # Service ของ Backend API
+  # Service ของ Backend API (ตอนนี้เหลือแค่ Service เดียว)
   api:
-    # สั่งให้ build image จาก Dockerfile ที่อยู่ในโฟลเดอร์ ./api
+    # --- แก้ไขส่วน Build ---
+    # เราเปลี่ยน context เป็น . (โฟลเดอร์โปรเจกต์ทั้งหมด)
+    # และระบุ path ไปยัง Dockerfile ให้ถูกต้อง เพื่อให้ Docker หา package.json เจอ
     build:
-      context: ./api
+      context: .
       dockerfile: Dockerfile
-    # ตั้งชื่อ container เพื่อให้ง่ายต่อการจัดการ
+    
     container_name: icrud_api
-    # Restart container อัตโนมัติหากเกิดข้อผิดพลาด
     restart: unless-stopped
-    # กำหนด Port Mapping จาก port 3000 ของ Host ไปยัง port 3000 ของ Container
     ports:
       - "3000:3000"
-    # กำหนด Environment Variables
+      
+    # --- แก้ไข Environment Variables ---
+    # เราจะให้ Drizzle ใช้ Connection String จาก POSTGRES_URL ในไฟล์ .env โดยตรง
     environment:
-      # DATABASE_URL จะต้องชี้ไปที่ service 'db' ของ PostgreSQL
-      # รูปแบบ: postgresql://USER:PASSWORD@HOST:PORT/DB_NAME
-      - DATABASE_URL=${DATABASE_URL}
+      - POSTGRES_URL=${POSTGRES_URL} # <--- จุดสำคัญ: ดึง URL จาก .env มาใช้งาน
       - API_SECRET=${API_SECRET}
-    # กำหนดว่า service นี้ต้องรอให้ service 'db' อยู่ในสถานะ healthy ก่อนจึงจะเริ่มทำงาน
-    depends_on:
-      db:
-        condition: service_healthy
-    # เชื่อมต่อกับ network ชื่อ app-network
-    networks:
-      - app-network
+      
+    # --- ลบส่วนที่เกี่ยวข้องกับ Service 'db' ทิ้ง ---
+    # ลบ depends_on: db: เพราะไม่ต้องรอ container db อีกต่อไป
+    # ลบ networks: เพราะไม่ต้องเชื่อมต่อกับ service อื่นใน network ภายในแล้ว
 
-  # Service ของฐานข้อมูล PostgreSQL
-  db:
-    # ใช้ image สำเร็จรูปของ PostgreSQL เวอร์ชั่น 15
-    image: postgres:15-alpine
-    container_name: icrud_db
-    restart: unless-stopped
-    # กำหนด Environment Variables สำหรับ PostgreSQL
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-    # กำหนด Volume เพื่อเก็บข้อมูลของ database อย่างถาวร
-    # แม้ container จะถูกลบไป ข้อมูลก็ยังคงอยู่
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    # กำหนด Health Check เพื่อตรวจสอบว่า database พร้อมใช้งานหรือไม่ [2]
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    # เชื่อมต่อกับ network ชื่อ app-network
-    networks:
-      - app-network
+# --- ลบ Service 'db' ทิ้งทั้งหมด ---
+# เราไม่ได้สร้าง container สำหรับฐานข้อมูลอีกต่อไป เพราะเราจะเชื่อมต่อไปยังฐานข้อมูลภายนอก
+# ดังนั้นจึงลบบล็อกของ service 'db' ทั้งหมดที่เคยอยู่ตรงนี้ทิ้งไป
 
-# กำหนด Network ที่จะให้ service ต่างๆ ใช้สื่อสารกัน
-networks:
-  app-network:
-    driver: bridge
-
-# กำหนด Named Volume สำหรับเก็บข้อมูลถาวร
-volumes:
-  db-data:
-    driver: local
+# --- ลบ Network และ Volume ที่ไม่จำเป็นแล้วทิ้งไป ---
+# เนื่องจากไม่มี service 'db' แล้ว จึงไม่จำเป็นต้องกำหนด custom network หรือ volume อีก

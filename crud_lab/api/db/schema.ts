@@ -7,7 +7,7 @@ export const student68 = t.pgTable("student68", {
   lastName: t.varchar({ length: 255 }).notNull(),      // นามสกุล
   studentId: t.varchar({ length: 20 }).unique().notNull(), // รหัสประจำตัว
 
-  birthDate: t.date().notNull(),                       // วันเกิด
+  birthDate: t.date({ mode: "date" }).notNull(),                       // วันเกิด
 
   gender: t.varchar({ length: 10 }).notNull(),         // เพศ เช่น 'ชาย'/'หญิง'
 });
