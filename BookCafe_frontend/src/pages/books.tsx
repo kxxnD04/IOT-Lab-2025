@@ -20,9 +20,9 @@ const bookImageUrls = [
 export default function BooksPage() {
   const { data: books, error } = useSWR<Book[]>("/books");
   
-    function Demo() {
-      return <Rating defaultValue={5} color="orange" />
-    }
+    // function Demo() {
+    //   return <Rating defaultValue={5} color="orange" />
+    // }
 
   return (
     <>
