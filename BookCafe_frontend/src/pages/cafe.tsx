@@ -24,7 +24,7 @@ const menuImages: { [key: string]: string } = {
 };
 
 export default function CafePage() {
-  const { data: menuItems, error } = useSWR<CafeMenu[]>("/cafe");
+  const { data: menuItems, error } = useSWR<CafeMenu[]>("/api/cafe");
   const [cart, setCart] = useState<OrderItem[]>([]);
   const [customerName, setCustomerName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);

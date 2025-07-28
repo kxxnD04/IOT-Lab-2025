@@ -12,7 +12,7 @@ import { IconAlertTriangleFilled, IconClipboardText } from "@tabler/icons-react"
 dayjs.locale('th');
 
 export default function OrdersPage() {
-  const { data: orders, error } = useSWR<Order[]>("/orders");
+  const { data: orders, error } = useSWR<Order[]>("/api/orders");
   const theme = useMantineTheme();
 
   // กำหนดสีสำหรับสถานะต่างๆ
