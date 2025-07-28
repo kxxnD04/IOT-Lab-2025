@@ -70,11 +70,7 @@ export default function BookEditById() {
       });
       navigate("/books");
     } catch (error) {
-              notifications.show({
-          title: "เกิดข้อผิดพลาดบางอย่าง",
-          message: "กรุณาลองใหม่อีกครั้ง หรือดูที่ Console สำหรับข้อมูลเพิ่มเติม",
-          color: "red",
-        });
+        console.log(AxiosError.ERR_BAD_RESPONSE)
     } finally {
       setIsProcessing(false);
     }

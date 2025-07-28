@@ -40,7 +40,7 @@ export default function BookCreatePage() {
       });
       navigate(`/books/${response.data.book.id}`);
     } catch (error) {
-      // ... Error Handling ...
+      console.log(AxiosError.ERR_BAD_RESPONSE)
     } finally {
       setIsProcessing(false);
     }
