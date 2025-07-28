@@ -33,9 +33,7 @@ const app = new Hono();
 
 app.use('*', cors({
   origin: [
-    'http://localhost:5173', // สำหรับตอนพัฒนา Frontend ในเครื่อง
-    'https://iot-lab-2025-lime.vercel.app'
-    // เพิ่ม URL ของ Vercel ที่นี่ตอนจะ Deploy
+    'http://localhost:5173',
   ],
   allowHeaders: ['Authorization', 'Content-Type'],
   allowMethods: ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
