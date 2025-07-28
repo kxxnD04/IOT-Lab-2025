@@ -31,10 +31,10 @@ import apiRouter from './routes/api.js';
 
 const app = new Hono();
 
-// ส่วนนี้ถูกต้องอยู่แล้ว ไม่ต้องแก้ไข
 app.use('*', cors({
   origin: [
     'http://localhost:5173', // สำหรับตอนพัฒนา Frontend ในเครื่อง
+    'https://iot-lab-2025-lime.vercel.app'
     // เพิ่ม URL ของ Vercel ที่นี่ตอนจะ Deploy
   ],
   allowHeaders: ['Authorization', 'Content-Type'],
