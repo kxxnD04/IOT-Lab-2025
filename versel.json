@@ -1,8 +1,22 @@
 {
+  "version": 2,
+  "builds": [
+    {
+      "src": "BookCafe_frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "BookCafe_frontend/dist"
+      }
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "http://16.176.138.246:3000/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/BookCafe_frontend"
     }
   ]
 }
