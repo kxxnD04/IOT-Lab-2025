@@ -17,7 +17,7 @@ export default function BookEditById() {
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const { data: book, isLoading, error, mutate } = useSWR<Book>(`/api/books/${bookId}`);
+  const { data: book, isLoading, error, mutate } = useSWR<Book>(`/books/${bookId}`);
   const [isSetInitialValues, setIsSetInitialValues] = useState(false);
 
   const bookEditForm = useForm({
@@ -40,14 +40,14 @@ export default function BookEditById() {
   const handleSubmit = async (values: typeof bookEditForm.values) => {
     try {
       setIsProcessing(true);
-      await axios.patch(`/api/books/${bookId}`, values);
+      await axios.patch(`/books/${bookId}`, values);
       mutate(); // สั่งให้ SWR โหลดข้อมูลใหม่หลังจากแก้ไข
       notifications.show({
         title: "แก้ไขข้อมูลหนังสือสำเร็จ",
         message: "ข้อมูลหนังสือได้รับการแก้ไขเรียบร้อยแล้ว",
         color: "teal",
       });
-      navigate(`/api/books/${bookId}`);
+      navigate(`/books/${bookId}`);
     } catch (error) {
         notifications.show({
           title: "เกิดข้อผิดพลาดบางอย่าง",
@@ -62,13 +62,13 @@ export default function BookEditById() {
   const handleDelete = async () => {
     try {
       setIsProcessing(true);
-      await axios.delete(`/api/books/${bookId}`);
+      await axios.delete(`/books/${bookId}`);
       notifications.show({
         title: "ลบหนังสือสำเร็จ",
         message: "ลบหนังสือเล่มนี้ออกจากระบบเรียบร้อยแล้ว",
         color: "red",
       });
-      navigate("/api/books/");
+      navigate("/books/");
     } catch (error) {
         console.log(AxiosError.ERR_BAD_RESPONSE)
     } finally {

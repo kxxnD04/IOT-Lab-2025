@@ -8,7 +8,7 @@ import { IconAlertTriangleFilled, IconEdit } from "@tabler/icons-react";
 
 export default function BookByIdPage() {
   const { bookId } = useParams();
-  const { data: book, isLoading, error } = useSWR<Book>(`/api/books/${bookId}`);
+  const { data: book, isLoading, error } = useSWR<Book>(`/books/${bookId}`);
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function BookByIdPage() {
                 color="blue"
                 size="xs"
                 component={Link}
-                to={`/api/books/${book.id}/edit`}
+                to={`/books/${book.id}/edit`}
                 className="mt-4"
                 leftSection={<IconEdit />}
               >

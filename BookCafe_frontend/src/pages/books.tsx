@@ -18,7 +18,7 @@ const bookImageUrls = [
   "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1770&auto=format&fit=crop",
 ];
 export default function BooksPage() {
-  const { data: books, error } = useSWR<Book[]>("/api/books");
+  const { data: books, error } = useSWR<Book[]>("/books");
   
     // function Demo() {
     //   return <Rating defaultValue={5} color="orange" />
