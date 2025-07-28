@@ -22,13 +22,32 @@
 
 // export default handle(app);
 // server.ts
-import { serve } from "@hono/node-server";
-import app from "./routes/api.js";
-import * as dotenv from 'dotenv';
-dotenv.config();
+import "dotenv/config";
+import { Hono } from 'hono';
+import { serve } from '@hono/node-server';
+import { cors } from 'hono/cors'; // <--- แก้ไข import ให้เป็นแบบนี้
+
+import apiRouter from './routes/api.js';
+
+const app = new Hono();
+
+// ส่วนนี้ถูกต้องอยู่แล้ว ไม่ต้องแก้ไข
+app.use('*', cors({
+  origin: [
+    'http://localhost:5173', // สำหรับตอนพัฒนา Frontend ในเครื่อง
+    // เพิ่ม URL ของ Vercel ที่นี่ตอนจะ Deploy
+  ],
+  allowHeaders: ['Authorization', 'Content-Type'],
+  allowMethods: ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
+}));
+
+// โค้ดที่เหลือของคุณ
+app.route("/", apiRouter);
+
+const port = 3000;
+console.log("🚀 Server running on http://localhost:3000");
+
 serve({
   fetch: app.fetch,
-  port: 3000,
-}, () => {
-  console.log("🚀 Server running on http://localhost:3000");
+  port
 });

@@ -1,4 +1,5 @@
 import * as t from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm"; 
 
 export const student68 = t.pgTable("student68", {
   id: t.bigserial({ mode: "number" }).primaryKey(), // primary key
@@ -18,7 +19,7 @@ export const books68 = t.pgTable("books68", {
     author: t.varchar({ length: 255 }).notNull(),
     publishedAt: t.date({ mode: "date" }).notNull(),
     description: t.text("description"),
-    isbn: t.varchar({ length: 20 }).unique(),
+    synopsis: t.varchar({ length: 555 }).notNull(),
     category: t.varchar({ length: 100 })
 });
 
@@ -49,3 +50,20 @@ export const orderItems68 = t.pgTable("order_items68", {
     quantity: t.integer("quantity").notNull(),
     notes: t.text("notes")
 });
+
+// บอกว่า 1 ออเดอร์ (orders68) มีได้หลายรายการ (orderItems68)
+export const ordersRelations = relations(orders68, ({ many }) => ({
+    orderItems: many(orderItems68),
+}));
+
+// บอกว่า 1 รายการ (orderItems68) จะเป็นของ 1 ออเดอร์ และเป็นของ 1 เมนู
+export const orderItemsRelations = relations(orderItems68, ({ one }) => ({
+    order: one(orders68, {
+        fields: [orderItems68.orderId],
+        references: [orders68.id],
+    }),
+    menuItem: one(cafe68, {
+        fields: [orderItems68.menuItemId],
+        references: [cafe68.id],
+    }),
+}));

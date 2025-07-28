@@ -40,7 +40,7 @@ bookRouter.post(
         message: "Invalid date format (expected YYYY-MM-DD)",
       }).transform((d) => dayjs(d).toDate()),
       description: z.string().optional(),
-      isbn: z.string().optional(),
+      synopsis: z.string().optional(), 
       category: z.string().optional(),
     })
   ),
@@ -62,7 +62,7 @@ bookRouter.patch(
       author: z.string().optional(),
       publishedAt: z.string().optional().transform((d) => (d ? dayjs(d).toDate() : undefined)),
       description: z.string().optional(),
-      isbn: z.string().optional(),
+      synopsis: z.string().optional(), 
       category: z.string().optional(),
     }).refine((data) => Object.keys(data).length > 0, {
       message: "At least one field must be provided for update",

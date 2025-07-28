@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import studentRouter from "./student.js";
 import bookRouter from "./book.js";
 import cafeRouter from "./cafe.js";
+import orderRouter from "./order.js";
 import { bearerAuth } from "hono/bearer-auth";
 import { env } from "hono/adapter";
 
@@ -153,7 +154,7 @@ apiRouter.get("/", (c) => {
             </p>
             
             <div class="api-info">
-                <strong>GUIDE:</strong> If you have an API secret key, you can try various REST API methods like GET, POST, PATCH, or DELETE using a tool like Postman with path /student.
+                <strong>GUIDE:</strong> If you have an API secret key, you can try various REST API methods like GET, POST, PATCH, or DELETE using a tool like Postman with path /students.
             </div>
             
             <p class="footer">
@@ -177,8 +178,8 @@ apiRouter.use(
   })
 );
 
-apiRouter.route("/student", studentRouter);
-apiRouter.route("/book", bookRouter);
+apiRouter.route("/students", studentRouter);
+apiRouter.route("/books", bookRouter);
 apiRouter.route("/cafe", cafeRouter);
-
+apiRouter.route("/orders", orderRouter);
 export default apiRouter;
