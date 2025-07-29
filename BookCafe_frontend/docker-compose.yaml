@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # This is your new frontend service
+  frontend:
+    container_name: bookcafe_frontend
+    # Build the Docker image from the Dockerfile in the current directory
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Forward the specified port from the host to the container
+    ports:
+      - "5173:80"
+    # Make the .env file available to the build process
+    env_file:
+      - .env
+    # It's a good practice to connect services to a shared network
+    # You can use the same network as your backend service
