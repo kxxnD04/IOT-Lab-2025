@@ -32,7 +32,7 @@ export default function BookCreatePage() {
   const handleSubmit = async (values: typeof bookCreateForm.values) => {
     try {
       setIsProcessing(true);
-      const response = await axios.post<{ book: Book }>(`/books/`, values);
+      const response = await axios.post<{ book: Book }>(`/books`, values);
       notifications.show({
         title: "เพิ่มข้อมูลหนังสือสำเร็จ",
         message: "ข้อมูลหนังสือได้รับการเพิ่มเรียบร้อยแล้ว",

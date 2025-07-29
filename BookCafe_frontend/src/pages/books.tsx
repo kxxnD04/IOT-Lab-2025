@@ -13,8 +13,6 @@ const bookImageUrls = [
   "https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=1770&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1887&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=1770&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1549122728-f51970943591?q=80&w=1831&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1580870193458-1e7a5309f1f6?q=80&w=1887&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1770&auto=format&fit=crop",
 ];
 export default function BooksPage() {

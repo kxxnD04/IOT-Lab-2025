@@ -68,7 +68,7 @@ export default function BookEditById() {
         message: "ลบหนังสือเล่มนี้ออกจากระบบเรียบร้อยแล้ว",
         color: "red",
       });
-      navigate("/books/");
+      navigate("/books");
     } catch (error) {
         console.log(AxiosError.ERR_BAD_RESPONSE)
     } finally {
