@@ -65,7 +65,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <SWRConfig
       value={{
-        // แก้ไข fetcher ให้เรียบง่ายแบบนี้
         fetcher: (url: string) => axios.get(url).then((res) => res.data),
       }}
     >
