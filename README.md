@@ -3,12 +3,16 @@
 
 ### Week 1 Assignment 1 in folder crud_lab. use git clone and follow Readme.md For local host
 
-### Week 1 Assignment 2 Link ( AWS cloud with EC2 ): `https://16-176-138-246.sslip.io/api/` or `https://16-176-138-246.sslip.io/api/students` For API test
+### Week 1 Assignment 2 Link ( AWS cloud with EC2 ): 
+- https://16-176-138-246.sslip.io/api/ A Landing page
+### Week 1 Assignment 2  For API test 
+- https://16-176-138-246.sslip.io/api/students For API test
 
-### Assignment Hono Week 2 Website Link ( AWS cloud with EC2 ): `https://16-176-138-246.sslip.io`
+### Assignment Hono Week 2 Website Link ( AWS cloud with EC2 ): 
+- https://16-176-138-246.sslip.io
 
-#### For all api test for Assignment Hono Week 2
-- `https://16-176-138-246.sslip.io/api/books`
-- `https://16-176-138-246.sslip.io/api/books/{id}`
-- `https://16-176-138-246.sslip.io/api/cafe`
-- `https://16-176-138-246.sslip.io/api/orders`
+#### For all api test for Assignment Hono Week 2 (Postman)
+- https://16-176-138-246.sslip.io/api/books
+- https://16-176-138-246.sslip.io/api/books/{id}
+- https://16-176-138-246.sslip.io/api/cafe
+- https://16-176-138-246.sslip.io/api/orders
