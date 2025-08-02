@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./crud_lab
+      dockerfile: Dockerfile
+    container_name: icrud_api
+    restart: unless-stopped
+    env_file:
+      - .env                  # ดึงค่าจากไฟล์ .env ทั้งหมด
+    # ไม่ต้องมี ports เพราะ Nginx จะจัดการให้
+
+  # 2. Frontend Service (ตั้งชื่อว่า frontend)
+  frontend:
+    build:
+      context: ./BookCafe_frontend  # ระบุว่าให้ build จากโฟลเดอร์ frontend
+      dockerfile: Dockerfile
+    container_name: bookcafe_frontend
+    restart: unless-stopped
+    env_file:
+      - .env                  # ดึงค่าจากไฟล์ .env ทั้งหมด
+    # ไม่ต้องมี ports เพราะ Nginx จะจัดการให้
+
+  # 3. Nginx Proxy Manager (ตั้งชื่อว่า npm)
+  npm:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: npm
+    restart: unless-stopped
+    ports:
+      - '80:80'               # Port สำหรับ HTTP (จำเป็นสำหรับการขอ SSL)
+      - '443:443'             # Port สำหรับ HTTPS (ประตูหลัก)
+      - '81:81'               # Port สำหรับเข้าหน้า Admin ของ NPM
+    volumes:
+      - ./npm-data:/data
+      - ./npm-letsencrypt:/etc/letsencrypt
+
+# สร้าง Network กลางให้ทุก container คุยกันได้
+networks:
+  default:
+    driver: bridge

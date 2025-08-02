@@ -12,3 +12,7 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Nginx Proxy Manager data and certs - DO NOT COMMIT
+npm-data/
+npm-letsencrypt/
